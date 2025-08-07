@@ -667,92 +667,196 @@ h3 { font-size: 2em; }
     border-top: 1px solid var(--border-color);
 }
 
-/* Responsividade */
-@media (max-width: 1024px) {
-    h1 { font-size: 3.5em; }
-    h2 { font-size: 2.2em; }
-    h3 { font-size: 1.8em; }
+/* ================================================================= */
+/* RESPONSIVIDADE - Media Queries para telas menores */
+/* ================================================================= */
 
+/* Tablet e Dispositivos Menores (até 1024px de largura) */
+@media (max-width: 1024px) {
+    /* Ajustes Gerais */
+    .container {
+        width: 90%; /* Ajusta a largura do container para 90% */
+    }
+
+    /* Reduz o tamanho das fontes globais para um melhor encaixe */
+    h1 { font-size: 3em; }
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.7em; }
+
+    /* Ajustes Específicos para a Seção Hero */
     .hero-text h1 {
-        font-size: 3.5em;
+        font-size: 3em; /* Reduz o tamanho do H1 dentro do Hero */
     }
     .hero-text .subtitle {
-        font-size: 1.2em;
-    }
-    .hero-content {
-        flex-direction: column; /* Coloca imagem e texto em coluna em telas menores */
-        text-align: center;
-    }
-    .hero-text {
-        text-align: center;
+        font-size: 1.1em; /* Reduz o tamanho do subtítulo do Hero */
     }
     .hero-image img {
-        margin-top: 30px;
+        width: 200px; /* Reduz o tamanho da imagem do avatar */
+        height: 200px;
+    }
+
+    /* Ajustes para a Introdução (se ainda estiver ativa) */
+    .intro-content {
+        font-size: 1.8em; /* Reduz o tamanho do texto da intro */
     }
 }
 
+/* Smartphones e Tablets em Orientação Retrato (até 768px de largura) */
 @media (max-width: 768px) {
+    /* Ajustes Gerais para Mobile */
     .container {
-        width: 95%;
-        padding: 20px 0;
+        width: 95%; /* Usa quase toda a largura disponível */
+        padding: 20px 0; /* Reduz o padding vertical das seções */
     }
 
-    h1 { font-size: 2.8em; }
-    h2 { font-size: 2em; }
+    /* Base Font Size para Melhor Legibilidade no Celular */
+    body {
+        font-size: 0.9em; /* Torna o texto base ligeiramente menor */
+    }
+    /* Ajustes Finos de Fontes para Mobile */
+    h1 { font-size: 2.5em; }
+    h2 { font-size: 1.8em; }
+    h3 { font-size: 1.5em; }
+    .section-subtitle {
+        font-size: 1em;
+        margin-bottom: 30px; /* Reduz o espaçamento do subtítulo */
+    }
 
+    /* Header e Navegação (Transformando em Menu de Coluna) */
+    .main-header {
+        padding: 10px 0; /* Menor padding para o header */
+    }
     .main-nav ul {
-        flex-direction: column; /* Navegação em coluna em mobile */
-        align-items: center;
+        flex-direction: column; /* Empilha os links verticalmente */
+        align-items: center; /* Centraliza os itens de navegação */
     }
     .main-nav ul li {
-        margin: 10px 0;
+        margin: 8px 0; /* Espaçamento vertical entre os links */
+    }
+    .main-nav a {
+        font-size: 1em; /* Ajusta o tamanho do texto do link de navegação */
     }
 
+    /* Seção Hero - Layout Vertical para Mobile */
     .hero-section {
-        padding: 60px 0;
-        min-height: unset;
+        padding: 50px 0; /* Menos padding vertical para o Hero */
+        min-height: unset; /* Permite que a altura seja definida pelo conteúdo */
+    }
+    .hero-content {
+        flex-direction: column; /* Texto e imagem um abaixo do outro */
+        text-align: center; /* Centraliza o conteúdo dentro do Hero */
+        gap: 30px; /* Reduz o espaço entre texto e imagem */
+    }
+    .hero-text {
+        text-align: center; /* Garante que o texto do Hero esteja centralizado */
     }
     .hero-text h1 {
-        font-size: 2.8em;
+        font-size: 2.5em; /* Ajusta novamente para telas menores */
+        text-align: center;
+    }
+    .hero-text .subtitle {
+        font-size: 1.1em;
+        text-align: center;
+        max-width: unset; /* Remove o max-width para não restringir o texto */
+    }
+    .hero-image img {
+        width: 150px; /* Reduz ainda mais o tamanho do avatar */
+        height: 150px;
+        margin-top: 20px; /* Adiciona um pequeno espaço acima da imagem */
+    }
+    .btn {
+        padding: 12px 25px; /* Botões um pouco menores */
+        font-size: 0.9em;
+    }
+
+    /* Introdução (se o CSS ainda estiver ativo) */
+    .intro-content {
+        font-size: 1.2em; /* Ajusta ainda mais para o mobile */
+    }
+
+    /* Seções de Conteúdo (Skills, Projects, Contact) */
+    .section-container {
+        padding: 40px 0; /* Reduz o padding das seções */
+        border-radius: 10px; /* Bordas ligeiramente menores */
+    }
+
+    /* Grids: Transforma em uma Única Coluna para Mobile */
+    .skills-grid,
+    .projects-grid,
+    .contact-info-grid {
+        grid-template-columns: 1fr; /* Cada item ocupa a largura total da tela */
+        gap: 20px; /* Reduz o espaçamento entre os itens */
+    }
+    .skill-item, .project-card, .contact-item {
+        padding: 20px; /* Reduz o padding dos cards */
+    }
+
+    /* Timeline de Educação - Ajustes para Mobile */
+    .education-timeline {
+        padding-left: 0; /* Remove o padding esquerdo para centralizar melhor */
+        max-width: unset; /* Permite que a timeline ocupe a largura total */
+    }
+    .education-timeline::before {
+        left: 20px; /* Ajusta a posição da linha da timeline */
+    }
+    .timeline-item {
+        padding-left: 50px; /* Mais espaço para o marcador da timeline */
+        margin-bottom: 30px;
+    }
+    .timeline-marker {
+        left: 10px; /* Alinha o marcador com a linha da timeline */
+        width: 15px; /* Marcador menor */
+        height: 15px;
+    }
+    .timeline-content h3 {
+        font-size: 1.4em; /* Ajusta o tamanho do título da timeline */
+    }
+    .timeline-content p {
+        font-size: 0.9em; /* Ajusta o tamanho do texto da timeline */
+    }
+
+    /* Tags de Tecnologia nos Projetos */
+    .tech-tags span {
+        padding: 6px 12px;
+        font-size: 0.8em;
+        margin-right: 8px;
+        margin-bottom: 8px;
+    }
+
+    /* Rodapé */
+    .main-footer {
+        padding: 20px 0;
+        font-size: 0.8em;
+    }
+}
+
+/* Smartphones Menores (até 480px de largura) */
+@media (max-width: 480px) {
+    /* Ajustes Finais para Telas Muito Pequenas */
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
+    h3 { font-size: 1.3em; }
+
+    .hero-text h1 {
+        font-size: 2em;
     }
     .hero-text .subtitle {
         font-size: 1em;
     }
 
-    .section-container {
-        padding: 60px 0;
+    .intro-content {
+        font-size: 1em; /* Texto da intro ainda menor para caber */
     }
 
-    .skills-grid, .projects-grid, .contact-info-grid {
-        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+    .main-nav ul li {
+        margin: 5px 0;
     }
-
-    .timeline-item {
-        padding-left: 20px;
-    }
-    .timeline-marker {
-        left: -5px; /* Ajusta a posição do marcador */
-    }
-}
-
-@media (max-width: 480px) {
-    h1 { font-size: 2.2em; }
-    h2 { font-size: 1.8em; }
-    h3 { font-size: 1.5em; }
-
     .main-nav a {
-        font-size: 0.95em;
+        font-size: 0.9em;
     }
 
-    .hero-text h1 {
-        font-size: 2.2em;
-    }
-    .hero-image img {
-        width: 180px;
-        height: 180px;
-    }
     .btn {
-        padding: 12px 25px;
-        font-size: 0.9em;
+        padding: 10px 20px;
+        font-size: 0.8em;
     }
 }
