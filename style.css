@@ -1,0 +1,758 @@
+/* --- ESTILOS DA INTRODUÇÃO (PURO CSS) --- */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    /* ANIMAÇÃO DE SAÍDA DO OVERLAY: Começa DEPOIS que as mensagens terminam */
+    animation: fadeOutOverlay 1.5s forwards; /* 1.5s de duração, mantém o estado final */
+    animation-delay: 5s; /* Ajuste este valor. Tempo total das mensagens + um pequeno atraso */
+}
+
+.intro-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    font-family: 'Orbitron', monospace;
+    color: var(--accent-light);
+    font-size: 2.2em; /* Tamanho do texto das mensagens */
+    overflow: hidden; /* Para garantir que o clip-path funcione */
+}
+
+.intro-messages {
+    display: flex;
+    flex-direction: column; /* Mensagens uma abaixo da outra */
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 15px; /* Espaço entre as mensagens */
+    position: relative;
+    z-index: 3; /* Acima do web-pattern-bg */
+}
+
+.intro-message {
+    opacity: 0; /* Esconde todas as mensagens inicialmente */
+    transform: translateY(20px); /* Começa ligeiramente abaixo */
+    white-space: nowrap; /* Evita quebras de linha */
+    overflow: hidden; /* Necessário para clip-path ou width animation */
+    /* Efeito de glitch sutil */
+    text-shadow: 0 0 5px var(--accent-light);
+}
+
+/* ANIMAÇÕES DE ENTRADA PARA CADA MENSAGEM */
+/* Ajuste os 'animation-delay' para sequenciar as mensagens */
+.message-1 {
+    animation: revealText 0.8s ease-out forwards; /* Revela texto */
+    animation-delay: 0.5s; /* Começa depois de 0.5s */
+}
+
+.message-2 {
+    animation: revealText 0.8s ease-out forwards;
+    animation-delay: 2.0s; /* Começa depois de 2s (0.5s para 1 + 0.8s de animação + pausa) */
+}
+
+.message-3 {
+    animation: revealText 0.8s ease-out forwards;
+    animation-delay: 4.0s; /* Começa depois de 4s */
+}
+
+.message-4 {
+    animation: revealText 0.8s ease-out forwards;
+    animation-delay: 6.5s; /* Começa depois de 6.5s */
+}
+
+/* Keyframe para revelar o texto da esquerda para a direita */
+@keyframes revealText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        clip-path: inset(0 100% 0 0); /* Esconde o texto à direita */
+    }
+    1% {
+        opacity: 1; /* Torna visível quase que imediatamente */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        clip-path: inset(0 0% 0 0); /* Revela completamente */
+    }
+}
+
+/* ANIMAÇÃO DE FUNDO DO PADRÃO DE TEIA */
+.web-pattern-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/web-pattern-light.svg') no-repeat center center / contain;
+    opacity: 0.05;
+    animation: rotatePattern 40s linear infinite; /* Rotação contínua */
+    z-index: 1;
+}
+
+@keyframes rotatePattern {
+    from { transform: rotate(0deg) scale(1.0); }
+    to { transform: rotate(360deg) scale(1.1); } /* Leve zoom e rotação */
+}
+
+/* Keyframe para o overlay de introdução sumir */
+@keyframes fadeOutOverlay {
+    from { opacity: 1; visibility: visible; }
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* --- Resto do CSS (o que já tínhamos) --- */
+/* Custom Properties (Variáveis CSS) */
+:root {
+    --bg-dark: #1a1a2e;
+    --bg-card: #20203a;
+    --primary-red: #e30713;
+    --secondary-blue: #0d47a1;
+    --accent-light: #00bcd4;
+    --text-light: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border-color: #3a3a5a;
+    --gradient-hero: linear-gradient(135deg, var(--bg-dark) 0%, var(--secondary-blue) 100%);
+    --gradient-card-border: linear-gradient(45deg, var(--primary-red), var(--accent-light));
+
+    /* Fontes */
+    --font-primary: 'Montserrat', sans-serif;
+    --font-heading: 'Orbitron', sans-serif;
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Removido scroll-behavior: smooth no HTML */
+body {
+    font-family: var(--font-primary);
+    line-height: 1.8;
+    color: var(--text-light);
+    background-color: var(--bg-dark);
+    overflow-x: hidden;
+}
+
+/* O restante do seu CSS para o portfólio continua aqui... */
+/* Garanta que as classes 'hidden-item' e 'fade-in' e as animações a elas associadas sejam removidas, pois dependiam de JS */
+
+/* Remova as regras a seguir, pois dependiam de JavaScript: */
+/* .hidden-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; } */
+/* .fade-in { opacity: 1; transform: translateY(0); } */
+
+/* Custom Properties (Variáveis CSS) - Definindo a paleta de cores e tipografia */
+/* Cores inspiradas no traje do Homem-Aranha e na noite de Nova York */
+:root {
+    --bg-dark: #1a1a2e; /* Fundo principal, azul escuro quase preto */
+    --bg-card: #20203a; /* Fundo para cartões, um pouco mais claro que o principal */
+    --primary-red: #e30713; /* O vermelho vibrante do Homem-Aranha */
+    --secondary-blue: #0d47a1; /* O azul escuro do Homem-Aranha */
+    --accent-light: #00bcd4; /* Um ciano brilhante para detalhes e hover */
+    --text-light: #e0e0e0; /* Texto claro para contraste */
+    --text-muted: #b0b0b0; /* Texto secundário/sutil */
+    --border-color: #3a3a5a; /* Cor para bordas e divisores */
+    --gradient-hero: linear-gradient(135deg, var(--bg-dark) 0%, var(--secondary-blue) 100%);
+    --gradient-card-border: linear-gradient(45deg, var(--primary-red), var(--accent-light));
+
+    /* Fontes */
+    --font-primary: 'Montserrat', sans-serif; /* Para o corpo do texto, limpo e moderno */
+    --font-heading: 'Orbitron', sans-serif; /* Para títulos, com toque futurista */
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Remover scroll-behavior: smooth para navegação puramente HTML/CSS */
+/* html {
+    scroll-behavior: smooth;
+} */
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.8; /* Aumentando o line-height para melhor legibilidade */
+    color: var(--text-light);
+    background-color: var(--bg-dark);
+    overflow-x: hidden; /* Evita scroll horizontal indesejado */
+}
+
+/* Estilo para o container principal */
+.container {
+    width: 90%; /* Mais largura para aproveitar o espaço */
+    max-width: 1400px;
+    margin: auto;
+    padding: 30px 0; /* Padding vertical generoso */
+}
+
+/* Títulos Globais */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-red); /* Títulos em vermelho vibrante */
+    text-align: center;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(227, 7, 19, 0.4); /* Leve sombra para o título */
+}
+
+h1 { font-size: 3.5em; }
+h2 { font-size: 2.8em; }
+h3 { font-size: 2em; }
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.2em;
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header Principal */
+.main-header {
+    background: rgba(26, 26, 46, 0.8); /* Fundo semi-transparente para o header */
+    padding: 15px 0;
+    position: sticky; /* Header fixo no topo */
+    top: 0;
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra suave */
+    backdrop-filter: blur(8px); /* Efeito glassmorphism para o header */
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Centraliza os itens de navegação */
+}
+
+.main-nav ul li {
+    margin: 0 25px; /* Espaçamento maior entre os itens */
+}
+
+.main-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    position: relative;
+    padding-bottom: 5px; /* Espaço para o underline animado */
+    transition: color 0.3s ease;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-red); /* Underline vermelho */
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease-out; /* Animação do underline */
+}
+
+.main-nav a:hover {
+    color: var(--accent-light); /* Mudar cor no hover */
+}
+
+.main-nav a:hover::after {
+    width: 100%; /* Underline completo no hover */
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.primary-btn {
+    background-color: var(--primary-red);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(227, 7, 19, 0.5);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px) scale(1.02); /* Leve levantada e aumento no hover */
+    background-color: var(--accent-light); /* Mudar para cor de destaque no hover */
+    box-shadow: 0 8px 20px rgba(0, 188, 212, 0.6); /* Sombra mais intensa */
+}
+
+/* Seção Hero (Apresentação Principal) */
+.hero-section {
+    background: var(--gradient-hero); /* Gradiente de fundo */
+    padding: 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Para esconder elementos que saiam da área */
+    min-height: 80vh; /* Altura mínima para a seção */
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/web-pattern.png') repeat; /* Adicione uma imagem de padrão de teia sutil aqui */
+    opacity: 0.05; /* Bem sutil */
+    z-index: 1;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: row; /* Layout padrão em linha */
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Espaço entre texto e imagem */
+    position: relative;
+    z-index: 2; /* Acima do padrão de teia */
+    text-align: left; /* Alinha o texto do hero à esquerda */
+}
+
+.hero-text {
+    flex: 2; /* Ocupa mais espaço */
+}
+
+.hero-text h1 {
+    font-size: 4.5em; /* Título maior */
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-align: left; /* Alinha o título à esquerda */
+    color: var(--text-light); /* Título em branco para se destacar */
+    text-shadow: none; /* Remove a sombra padrão */
+}
+
+.hero-text .accent-text {
+    color: var(--primary-red);
+    text-shadow: 0 0 15px rgba(227, 7, 19, 0.6); /* Glow mais forte no nome Peter */
+}
+
+.hero-text .subtitle {
+    font-size: 1.4em;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 30px;
+    text-align: left; /* Alinha o subtítulo à esquerda */
+}
+
+.hero-image {
+    flex: 1; /* Ocupa menos espaço */
+    text-align: center;
+}
+
+.hero-image img {
+    width: 250px; /* Tamanho da imagem do avatar */
+    height: 250px;
+    border-radius: 50%;
+    border: 5px solid var(--accent-light); /* Borda com cor de destaque */
+    box-shadow: 0 0 25px rgba(0, 188, 212, 0.7); /* Efeito de brilho */
+    object-fit: cover;
+    animation: pulse 2s infinite alternate; /* Animação de pulsação */
+}
+
+@keyframes pulse {
+    from { transform: scale(1); box-shadow: 0 0 20px rgba(0, 188, 212, 0.5); }
+    to { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 188, 212, 0.8); }
+}
+
+/* Estilo para as seções genéricas */
+.section-container {
+    padding: 80px 0;
+    margin-bottom: 40px;
+    background-color: var(--bg-card); /* Fundo mais claro para seções */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Sombra profunda */
+    border: 1px solid var(--border-color); /* Borda sutil */
+    position: relative;
+    overflow: hidden;
+}
+
+.section-container::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, var(--primary-red) 0%, transparent 70%); /* Ponto de luz sutil */
+    opacity: 0.1;
+    filter: blur(50px);
+    animation: moveLight 8s infinite alternate ease-in-out; /* Animação do ponto de luz */
+}
+
+@keyframes moveLight {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(calc(100% - 50px), calc(100% - 50px)); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Seção Sobre Mim */
+.about-section p {
+    text-align: center;
+    font-size: 1.15em;
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Layout responsivo de grid */
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.skill-item {
+    background-color: var(--bg-dark);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px); /* Leve levantada no hover */
+    box-shadow: 0 10px 20px rgba(0, 188, 212, 0.3); /* Sombra com cor de destaque */
+}
+
+.skill-icon {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 15px;
+    color: var(--accent-light); /* Ícones com cor de destaque */
+}
+
+.skill-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--primary-red);
+}
+
+.skill-item p {
+    font-size: 1em;
+    color: var(--text-muted);
+}
+
+/* Seção Formação (Timeline) */
+.education-timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+.education-timeline::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--border-color); /* Linha da timeline */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin-left: -2px; /* Centraliza a linha */
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 40px; /* Espaço para o marcador */
+}
+
+.timeline-marker {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-red); /* Marcador vermelho */
+    border-radius: 50%;
+    left: -10px; /* Centraliza no meio da linha */
+    top: 5px;
+    border: 3px solid var(--bg-card); /* Borda para contraste */
+    box-shadow: 0 0 15px rgba(227, 7, 19, 0.5); /* Glow no marcador */
+}
+
+.timeline-content {
+    background-color: var(--bg-dark);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateX(5px); /* Desliza para a direita no hover */
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+}
+
+.timeline-content h3 {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 1.7em;
+    color: var(--accent-light);
+    text-shadow: none;
+}
+
+.timeline-content p {
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.timeline-content p strong {
+    color: var(--text-light);
+}
+
+/* Seção Experiências (Grid de Projetos) */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Grid responsivo para projetos */
+    gap: 30px;
+    padding-top: 20px;
+}
+
+.project-card {
+    background-color: var(--bg-dark);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Para empurrar o link para baixo */
+}
+
+.project-card:hover {
+    transform: translateY(-8px) scale(1.01); /* Leve levantada e aumento */
+    box-shadow: 0 15px 30px rgba(227, 7, 19, 0.4); /* Sombra mais intensa com cor primária */
+    border-color: var(--primary-red); /* Borda destacada */
+}
+
+.project-card h3 {
+    text-align: left;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: var(--primary-red);
+    text-shadow: none;
+}
+
+.project-card p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço disponível */
+}
+
+.tech-tags {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.tech-tags span {
+    display: inline-block;
+    background-color: var(--secondary-blue); /* Fundo azul para tags de tecnologia */
+    color: var(--text-light);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(13, 71, 161, 0.5); /* Borda sutil */
+}
+
+.project-link {
+    display: inline-block;
+    color: var(--accent-light);
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.project-link::after {
+    content: ' →'; /* Seta para indicar link */
+}
+
+.project-link:hover {
+    color: var(--primary-red);
+    transform: translateX(5px); /* Desliza a seta no hover */
+}
+
+.project-link.disabled-link {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.project-link.disabled-link:hover {
+    transform: none;
+    color: var(--text-muted);
+}
+
+
+/* Seção Contato */
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.contact-item {
+    background-color: var(--bg-dark);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 188, 212, 0.3);
+}
+
+.contact-icon {
+    font-size: 3.5em;
+    display: block;
+    margin-bottom: 15px;
+    color: var(--primary-red);
+}
+
+.contact-item h3 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    color: var(--accent-light);
+    text-shadow: none;
+}
+
+.contact-item p, .contact-item a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.contact-item a:hover {
+    color: var(--primary-red);
+    text-decoration: underline;
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--bg-dark);
+    color: var(--text-muted);
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9em;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    h1 { font-size: 3.5em; }
+    h2 { font-size: 2.2em; }
+    h3 { font-size: 1.8em; }
+
+    .hero-text h1 {
+        font-size: 3.5em;
+    }
+    .hero-text .subtitle {
+        font-size: 1.2em;
+    }
+    .hero-content {
+        flex-direction: column; /* Coloca imagem e texto em coluna em telas menores */
+        text-align: center;
+    }
+    .hero-text {
+        text-align: center;
+    }
+    .hero-image img {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px 0;
+    }
+
+    h1 { font-size: 2.8em; }
+    h2 { font-size: 2em; }
+
+    .main-nav ul {
+        flex-direction: column; /* Navegação em coluna em mobile */
+        align-items: center;
+    }
+    .main-nav ul li {
+        margin: 10px 0;
+    }
+
+    .hero-section {
+        padding: 60px 0;
+        min-height: unset;
+    }
+    .hero-text h1 {
+        font-size: 2.8em;
+    }
+    .hero-text .subtitle {
+        font-size: 1em;
+    }
+
+    .section-container {
+        padding: 60px 0;
+    }
+
+    .skills-grid, .projects-grid, .contact-info-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+    }
+
+    .timeline-item {
+        padding-left: 20px;
+    }
+    .timeline-marker {
+        left: -5px; /* Ajusta a posição do marcador */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.8em; }
+    h3 { font-size: 1.5em; }
+
+    .main-nav a {
+        font-size: 0.95em;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2em;
+    }
+    .hero-image img {
+        width: 180px;
+        height: 180px;
+    }
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.9em;
+    }
+}
